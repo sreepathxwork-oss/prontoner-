@@ -23,7 +23,7 @@ The ultimate hyper-functional prompt engineering dashboard. Built with React, Ta
 
 1.  Clone the repository:
     ```bash
-    git clone <your-repo-url>
+    git clone <https://github.com/sreepathxwork-oss/prontoner-.git>
     cd promtoner-x
     ```
 
