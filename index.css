@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Fira Code", monospace;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+
+  --color-primary: #FF2A85;
+  --color-secondary: #7A00FF;
+  --color-accent: #FF9900;
+  --color-bg: #0B0510;
+  --color-surface: rgba(11, 5, 16, 0.4);
+  --color-ink: #FFFFFF;
+}
+
+@layer base {
+  body {
+    @apply text-ink font-sans selection:bg-primary/30 antialiased overflow-x-hidden;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tighter uppercase;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.liquid-glass-container {
+  @apply relative overflow-hidden rounded-[40px] border border-white/10 shadow-2xl;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.05),
+    0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl transition-all duration-700 rounded-[36px];
+  box-shadow: 
+    inset 0 0 15px rgba(255, 255, 255, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.glass:hover {
+  @apply bg-white/10 border-white/20;
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 0 0 25px rgba(255, 255, 255, 0.1),
+    0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.liquid-border {
+  position: relative;
+  border-radius: 36px;
+  padding: 1px;
+  background: linear-gradient(
+    var(--angle, 0deg),
+    rgba(255, 42, 133, 0.5),
+    rgba(122, 0, 255, 0.5),
+    rgba(255, 153, 0, 0.5),
+    rgba(255, 42, 133, 0.5)
+  );
+  animation: rotate-gradient 10s linear infinite;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-gradient {
+  to { --angle: 360deg; }
+}
+
+.liquid-button {
+  @apply relative overflow-hidden rounded-2xl transition-all duration-500 font-display tracking-widest uppercase;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.liquid-button:hover {
+  @apply bg-white/10 border-white/30;
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.1),
+    0 0 30px rgba(255, 42, 133, 0.2);
+}
+
+.liquid-button::after {
+  content: '';
+  @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+}
+
+.liquid-button:hover::after {
+  @apply opacity-100;
+}
+
+.hardware-border {
+  @apply border border-dashed border-white/10;
+}
+
+.glow-primary {
+  box-shadow: 0 0 40px rgba(255, 42, 133, 0.3);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 40px rgba(122, 0, 255, 0.3);
+}
+
+.text-glow {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 0.5; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes fluid-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-fluid {
+  background: linear-gradient(-45deg, #0B0510, #1A0B2E, #2D0A31, #0B0510);
+  background-size: 400% 400%;
+  animation: fluid-flow 15s ease infinite;
+}
+
+.atmosphere {
+  background: 
+    radial-gradient(circle at 50% 30%, rgba(255, 42, 133, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 10% 80%, rgba(122, 0, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 90% 20%, rgba(255, 153, 0, 0.1) 0%, transparent 50%);
+  filter: blur(80px);
+  opacity: 0.6;
+}
+
+.noise {
+  @apply fixed inset-0 opacity-[0.03] pointer-events-none z-[100];
+  background: url('https://grainy-gradients.vercel.app/noise.svg');
+}
+
+.scanline {
+  @apply fixed inset-0 pointer-events-none z-50 opacity-[0.05];
+  background: linear-gradient(to bottom, transparent 50%, rgba(255, 42, 133, 0.1) 50%);
+  background-size: 100% 4px;
+}
+
+.bubble {
+  @apply absolute rounded-full bg-white/10 blur-[1px] pointer-events-none;
+  box-shadow: inset -2px -2px 4px rgba(255, 255, 255, 0.2), inset 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.liquid-glass {
+  background: rgba(255, 255, 255, var(--glass-opacity, 0.05));
+  backdrop-filter: blur(var(--glass-blur, 30px));
+  @apply border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)] rounded-[40px];
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.05),
+    0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.glass-low {
+  --glass-blur: 10px;
+  --glass-opacity: 0.03;
+}
+
+.glass-high {
+  --glass-blur: 40px;
+  --glass-opacity: 0.1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-primary/50 transition-colors;
+}
